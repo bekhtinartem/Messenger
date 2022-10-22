@@ -44,21 +44,21 @@ module.exports = {
       // Use default provider, Regtest starts with unlocked accounts
       host: '127.0.0.1',
       port: 4444,
-      network_id: 33,
+      network_id: '1',
       networkCheckTimeout: 1e3,
     },
     testnet: {
       provider: () => new HDWalletProvider({
         mnemonic: {
-          phrase: testnetSeedPhrase,
+          phrase: "black avocado smart screen work goddess eyebrow immune enlist crazy stereo yellow",
         },
         providerOrUrl: 'https://public-node.testnet.rsk.co/',
         // Higher polling interval to check for blocks less frequently
         pollingInterval: 15e3,
       }),
       // Ref: http://developers.rsk.co/rsk/architecture/account-based/#chainid
-      network_id: 31,
-      gasPrice: Math.floor(gasPriceTestnet * TESTNET_GAS_MULT),
+      network_id: '*',
+      gasPrice: 0x3e252e0,//Math.floor(gasPriceTestnet * TESTNET_GAS_MULT),
       networkCheckTimeout: 1e6,
       timeoutBlocks: 100,
       // Higher polling interval to check for blocks less frequently

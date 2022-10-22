@@ -1,4 +1,5 @@
 pragma solidity 0.5.7;
+pragma experimental ABIEncoderV2;
 
 contract Election {
     
@@ -15,7 +16,6 @@ contract Election {
     struct User {
         uint id;
         string name;
-        uint countMessages;
     }
 
     // Read/write users
@@ -31,20 +31,22 @@ contract Election {
         addUser('2');
     }
 
-    function addUser (string memory _name) private {
+    function addUser (string memory _name) public {
         usersCount++;
-        users[usersCount]=User(usersCount, _name, 0);
+        users[usersCount]=User(usersCount, _name);
         
     }
 
-    function sendMessage (uint _userFrom, uint _userTo, string memory _message) public {
+    function sendMessage (User memory _userFrom, User memory _userTo, string memory _message) public {
+        uint idUserFrom = _userFrom.id; 
+        uint idUserTo = _userTo.id; 
         require(
-            _userFrom > 0 &&
-            _userFrom <= usersCount &&
-            _userTo > 0 &&
-            _userTo <= usersCount);
+            idUserFrom > 0 &&
+            idUserFrom <= usersCount &&
+            idUserTo > 0 &&
+            idUserTo <= usersCount);
             countMessages++;
-            messanges[countMessages]=Messege(countMessages, _message, _userFrom, _userTo);
+            messanges[countMessages]=Messege(countMessages, _message, idUserFrom, idUserTo);
         
     }
 }
